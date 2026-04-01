@@ -111,8 +111,7 @@ a:hover{color:#FF2020}
 
 /* ========== SECTIONS ========== */
 section{padding:80px 0;position:relative}
-section:nth-child(odd){background:var(--bg)}
-section:nth-child(even){background:var(--surface)}
+section{background:var(--bg)}
 .section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
 .section-label::before{content:'';width:24px;height:2px;background:var(--red)}
 .section-title{font-family:var(--font-head);font-size:clamp(24px,4vw,40px);font-weight:700;letter-spacing:-.01em;color:var(--white);margin-bottom:16px;line-height:1.2}
@@ -311,7 +310,11 @@ tbody tr:last-child td{border-bottom:none}
 .glow-stat::after{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(204,0,0,.06) 0%,transparent 70%);pointer-events:none}
 
 /* Visual separators between sections */
-.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(204,0,0,.3),transparent);margin:0;border:none}
+.section-divider{width:100%;border:none;margin:0;padding:0;height:80px;background:var(--bg);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.section-divider::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(204,0,0,.2),transparent);animation:dividerPulse 3s ease-in-out infinite}
+.section-divider::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:rgba(204,0,0,.3);box-shadow:0 0 12px rgba(204,0,0,.2);animation:dotPulse 3s ease-in-out infinite}
+@keyframes dividerPulse{0%,100%{width:100px;opacity:.3}50%{width:300px;opacity:.6}}
+@keyframes dotPulse{0%,100%{opacity:.3;transform:translate(-50%,-50%) scale(.8)}50%{opacity:.7;transform:translate(-50%,-50%) scale(1.2)}}
 
 /* Decorative dots pattern */
 .dots-pattern{position:absolute;right:0;top:0;width:200px;height:200px;background-image:radial-gradient(rgba(204,0,0,.15) 1px,transparent 1px);background-size:20px 20px;opacity:.4;pointer-events:none}
@@ -499,7 +502,7 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </section>
 
-<hr class="section-divider">
+<div class="section-divider"></div>
 
 <!-- MARKET OVERVIEW -->
 <section id="market">
@@ -838,7 +841,7 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </section>
 
-<hr class="section-divider">
+<div class="section-divider"></div>
 
 <!-- COMPETITORS -->
 <section id="competitors">
@@ -991,7 +994,7 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </section>
 
-<hr class="section-divider">
+<div class="section-divider"></div>
 
 <!-- OEM MAPPING -->
 <section id="oem">
@@ -1090,7 +1093,7 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </section>
 
-<hr class="section-divider">
+<div class="section-divider"></div>
 
 <!-- APPLICATION SECTORS -->
 <section id="applications">
@@ -1190,7 +1193,7 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </section>
 
-<hr class="section-divider">
+<div class="section-divider"></div>
 
 <!-- PRICING INTELLIGENCE -->
 <section id="pricing">
@@ -1312,7 +1315,7 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </section>
 
-<hr class="section-divider">
+<div class="section-divider"></div>
 
 <!-- OPPORTUNITY -->
 <section id="opportunity">
