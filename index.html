@@ -109,9 +109,17 @@ a:hover{color:#FF2020}
 .scroll-arrow{width:16px;height:16px;border-right:2px solid var(--gray-md);border-bottom:2px solid var(--gray-md);transform:rotate(45deg)}
 @media(min-width:769px){.scroll-indicator{display:flex;bottom:30px}.scroll-arrow{width:20px;height:20px}}
 
+/* ========== AMBIENT GLOWS ========== */
+.glow-tl{position:absolute;top:-10%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(204,0,0,.06) 0%,transparent 70%);pointer-events:none;z-index:0}
+.glow-tr{position:absolute;top:-5%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(204,0,0,.04) 0%,transparent 70%);pointer-events:none;z-index:0}
+.glow-bl{position:absolute;bottom:-10%;left:10%;width:450px;height:450px;background:radial-gradient(circle,rgba(255,255,255,.015) 0%,transparent 70%);pointer-events:none;z-index:0}
+.glow-br{position:absolute;bottom:-5%;right:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(204,0,0,.05) 0%,transparent 70%);pointer-events:none;z-index:0}
+.glow-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(204,0,0,.03) 0%,transparent 70%);pointer-events:none;z-index:0}
+
 /* ========== SECTIONS ========== */
-section{padding:80px 0;position:relative}
+section{padding:80px 0;position:relative;overflow:hidden}
 section{background:var(--bg)}
+section .container{position:relative;z-index:1}
 .section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
 .section-label::before{content:'';width:24px;height:2px;background:var(--red)}
 .section-title{font-family:var(--font-head);font-size:clamp(24px,4vw,40px);font-weight:700;letter-spacing:-.01em;color:var(--white);margin-bottom:16px;line-height:1.2}
@@ -464,6 +472,7 @@ tbody tr:last-child td{border-bottom:none}
 
 <!-- EXECUTIVE SUMMARY -->
 <section id="executive">
+  <div class="glow-tr"></div><div class="glow-bl"></div>
   <div class="container">
     <div class="reveal">
       <span class="section-label">01 Resumo Executivo</span>
@@ -506,6 +515,7 @@ tbody tr:last-child td{border-bottom:none}
 
 <!-- MARKET OVERVIEW -->
 <section id="market">
+  <div class="glow-tl"></div><div class="glow-br"></div>
   <div class="container">
     <div class="reveal">
       <span class="section-label">02 Visão do Mercado</span>
@@ -845,6 +855,7 @@ tbody tr:last-child td{border-bottom:none}
 
 <!-- COMPETITORS -->
 <section id="competitors">
+  <div class="glow-center"></div><div class="glow-tl"></div>
   <div class="container">
     <div class="reveal">
       <span class="section-label">04 Análise Competitiva</span>
@@ -998,6 +1009,7 @@ tbody tr:last-child td{border-bottom:none}
 
 <!-- OEM MAPPING -->
 <section id="oem">
+  <div class="glow-br"></div><div class="glow-tl"></div>
   <div class="container">
     <div class="reveal">
       <span class="section-label">05 Mapeamento OEM</span>
@@ -1097,6 +1109,7 @@ tbody tr:last-child td{border-bottom:none}
 
 <!-- APPLICATION SECTORS -->
 <section id="applications">
+  <div class="glow-tr"></div><div class="glow-bl"></div>
   <div class="container">
     <div class="reveal">
       <span class="section-label">06 Aplicações por Setor</span>
@@ -1197,6 +1210,7 @@ tbody tr:last-child td{border-bottom:none}
 
 <!-- PRICING INTELLIGENCE -->
 <section id="pricing">
+  <div class="glow-center"></div><div class="glow-br"></div>
   <div class="container">
     <div class="reveal">
       <span class="section-label">07 Inteligência de Preços</span>
@@ -1318,7 +1332,8 @@ tbody tr:last-child td{border-bottom:none}
 <div class="section-divider"></div>
 
 <!-- OPPORTUNITY -->
-<section id="opportunity">
+<section id="opportunity" style="overflow:hidden">
+  <div class="glow-tl"></div><div class="glow-tr"></div><div class="glow-bl"></div>
   <div class="container">
     <div class="reveal">
       <span class="section-label">08 Dimensionamento de Oportunidade</span>
