@@ -109,17 +109,10 @@ a:hover{color:#FF2020}
 .scroll-arrow{width:16px;height:16px;border-right:2px solid var(--gray-md);border-bottom:2px solid var(--gray-md);transform:rotate(45deg)}
 @media(min-width:769px){.scroll-indicator{display:flex;bottom:30px}.scroll-arrow{width:20px;height:20px}}
 
-/* ========== AMBIENT GLOWS ========== */
-.glow-tl{position:absolute;top:-10%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(204,0,0,.06) 0%,transparent 70%);pointer-events:none;z-index:0}
-.glow-tr{position:absolute;top:-5%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(204,0,0,.04) 0%,transparent 70%);pointer-events:none;z-index:0}
-.glow-bl{position:absolute;bottom:-10%;left:10%;width:450px;height:450px;background:radial-gradient(circle,rgba(255,255,255,.015) 0%,transparent 70%);pointer-events:none;z-index:0}
-.glow-br{position:absolute;bottom:-5%;right:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(204,0,0,.05) 0%,transparent 70%);pointer-events:none;z-index:0}
-.glow-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(204,0,0,.03) 0%,transparent 70%);pointer-events:none;z-index:0}
-
 /* ========== SECTIONS ========== */
-section{padding:80px 0;position:relative;overflow:hidden}
-section{background:var(--bg)}
-section .container{position:relative;z-index:1}
+section{padding:80px 0;position:relative}
+section:nth-child(odd){background:var(--bg)}
+section:nth-child(even){background:var(--surface)}
 .section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
 .section-label::before{content:'';width:24px;height:2px;background:var(--red)}
 .section-title{font-family:var(--font-head);font-size:clamp(24px,4vw,40px);font-weight:700;letter-spacing:-.01em;color:var(--white);margin-bottom:16px;line-height:1.2}
@@ -149,7 +142,7 @@ section .container{position:relative;z-index:1}
 
 /* ========== DATA TABLE ========== */
 .data-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius-lg);border:1px solid var(--surface-lt);scrollbar-width:thin;scrollbar-color:var(--red) var(--surface);position:relative}
-.data-table-wrap::after{content:'Deslize para ver mais →';display:none;position:sticky;bottom:0;left:0;right:0;text-align:center;font-size:11px;color:var(--gray-md);padding:6px;background:linear-gradient(transparent,var(--surface-md))}
+.data-table-wrap::after{content:attr(data-swipe-hint);display:none;position:sticky;bottom:0;left:0;right:0;text-align:center;font-size:11px;color:var(--gray-md);padding:6px;background:linear-gradient(transparent,var(--surface-md))}
 @media(min-width:769px){.data-table-wrap{overflow-x:hidden}}
 @media(max-width:768px){.data-table-wrap::after{display:block}}
 table{width:100%;border-collapse:collapse;font-size:13px}
@@ -178,7 +171,7 @@ tbody tr:last-child td{border-bottom:none}
 .pricing-card{background:var(--surface);border:1px solid var(--surface-lt);border-radius:var(--radius-lg);padding:28px;text-align:center;transition:border-color .3s,transform .3s}
 .pricing-card:hover{border-color:var(--red);transform:translateY(-4px)}
 .pricing-card.featured{border-color:var(--red);position:relative}
-.pricing-card.featured::after{content:'MAIOR DEMANDA';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--red);color:white;font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 14px;border-radius:9999px}
+.pricing-card.featured::after{content:attr(data-featured-label);position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--red);color:white;font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 14px;border-radius:9999px}
 .pricing-range{font-family:var(--font-head);font-size:14px;font-weight:600;color:var(--gray);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
 .pricing-value{font-family:var(--font-mono);font-size:28px;font-weight:700;color:var(--white);margin-bottom:4px}
 .pricing-sub{font-size:13px;color:var(--gray-md);margin-bottom:20px}
@@ -318,11 +311,7 @@ tbody tr:last-child td{border-bottom:none}
 .glow-stat::after{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(204,0,0,.06) 0%,transparent 70%);pointer-events:none}
 
 /* Visual separators between sections */
-.section-divider{width:100%;border:none;margin:0;padding:0;height:80px;background:var(--bg);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.section-divider::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(204,0,0,.2),transparent);animation:dividerPulse 3s ease-in-out infinite}
-.section-divider::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:rgba(204,0,0,.3);box-shadow:0 0 12px rgba(204,0,0,.2);animation:dotPulse 3s ease-in-out infinite}
-@keyframes dividerPulse{0%,100%{width:100px;opacity:.3}50%{width:300px;opacity:.6}}
-@keyframes dotPulse{0%,100%{opacity:.3;transform:translate(-50%,-50%) scale(.8)}50%{opacity:.7;transform:translate(-50%,-50%) scale(1.2)}}
+.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(204,0,0,.3),transparent);margin:0;border:none}
 
 /* Decorative dots pattern */
 .dots-pattern{position:absolute;right:0;top:0;width:200px;height:200px;background-image:radial-gradient(rgba(204,0,0,.15) 1px,transparent 1px);background-size:20px 20px;opacity:.4;pointer-events:none}
@@ -390,6 +379,21 @@ tbody tr:last-child td{border-bottom:none}
   .dots-pattern{display:none}
   .cta-visual{gap:20px}
 }
+
+/* ========== LANGUAGE SELECTOR ========== */
+.lang-selector{position:fixed;top:20px;right:24px;z-index:200;display:flex;align-items:center;background:rgba(17,17,17,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:9999px;padding:4px;gap:2px;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.lang-btn{width:40px;height:30px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;border-radius:9999px;cursor:pointer;font-size:17px;opacity:.45;transition:all 200ms ease-out;padding:0;line-height:1;position:relative}
+.lang-btn:hover{opacity:.75;transform:scale(1.05)}
+.lang-btn.active{background:rgba(204,0,0,.2);opacity:1;transform:scale(1.08);box-shadow:0 0 8px rgba(204,0,0,.25)}
+.lang-btn.active::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:16px;height:2px;background:#CC0000;border-radius:1px}
+body.lang-switching{opacity:0;transform:translateY(3px);transition:opacity 120ms ease-out,transform 120ms ease-out}
+body.lang-ready{opacity:1;transform:translateY(0);transition:opacity 180ms ease-out,transform 180ms ease-out}
+@media(prefers-reduced-motion:reduce){
+  body.lang-switching,body.lang-ready{transition:none!important;opacity:1!important;transform:none!important}
+}
+@media(max-width:768px){
+  .lang-selector{top:auto;bottom:20px;right:16px}
+}
 </style>
 </head>
 <body>
@@ -410,17 +414,23 @@ tbody tr:last-child td{border-bottom:none}
       <span></span><span></span><span></span>
     </button>
     <div class="nav-links" id="navLinks">
-      <a href="#executive">Resumo Executivo</a>
-      <a href="#market">Mercado</a>
-      <a href="#countries">Países</a>
-      <a href="#competitors">Concorrentes</a>
-      <a href="#oem">OEMs</a>
-      <a href="#pricing">Preços</a>
-      <a href="#opportunity">Oportunidade</a>
-      <a href="#sources">Fontes</a>
+      <a href="#executive" data-i18n="nav.executive">Resumo Executivo</a>
+      <a href="#market" data-i18n="nav.market">Mercado</a>
+      <a href="#countries" data-i18n="nav.countries">Pa&iacute;ses</a>
+      <a href="#competitors" data-i18n="nav.competitors">Concorrentes</a>
+      <a href="#oem" data-i18n="nav.oem">OEMs</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pre&ccedil;os</a>
+      <a href="#opportunity" data-i18n="nav.opportunity">Oportunidade</a>
+      <a href="#sources" data-i18n="nav.sources">Fontes</a>
     </div>
   </div>
 </nav>
+
+<!-- LANGUAGE SELECTOR -->
+<div class="lang-selector" id="langSelector">
+  <button class="lang-btn active" id="langPT" aria-label="Portugu&#234;s" data-lang="pt">&#127463;&#127479;</button>
+  <button class="lang-btn" id="langEN" aria-label="English" data-lang="en">&#127482;&#127480;</button>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -436,24 +446,23 @@ tbody tr:last-child td{border-bottom:none}
   </div>
   <div class="hero-float hf-3">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-    <span>22 Países</span>
+    <span data-i18n="hero.float3">22 Pa&iacute;ses</span>
   </div>
 
   <div class="dots-pattern" style="top:10%;right:5%"></div>
   <div class="dots-pattern" style="bottom:10%;left:5%;transform:rotate(180deg)"></div>
   <div class="hero-content">
-    <div class="hero-badge">Estudo de Mercado LATAM 2025</div>
-    <h1>Motores Diesel <span>NCM 84089090</span><br>América Latina</h1>
-<style>.hero h1 span{white-space:nowrap}</style>
-    <p class="hero-sub">Análise competitiva de 22 países, mapeamento de OEMs, inteligência de preços e dimensionamento de oportunidade para expansão MWM na América Latina.</p>
+    <div class="hero-badge" data-i18n="hero.badge">Estudo de Mercado LATAM 2025</div>
+    <h1 data-i18n-html="1">Motores Diesel <span>NCM 84089090</span><br>Am&eacute;rica Latina</h1>
+    <p class="hero-sub" data-i18n="hero.sub">An&aacute;lise competitiva de 22 pa&iacute;ses, mapeamento de OEMs, intelig&ecirc;ncia de pre&ccedil;os e dimensionamento de oportunidade para expans&atilde;o MWM na Am&eacute;rica Latina.</p>
     <div class="hero-stats">
       <div class="hero-stat reveal">
         <span class="num" data-count="22">0</span>
-        <span class="label">Países Analisados</span>
+        <span class="label" data-i18n="hero.stat1">Pa&iacute;ses Analisados</span>
       </div>
       <div class="hero-stat reveal">
         <span class="num">USD 3.2B</span>
-        <span class="label">Mercado LATAM 2024</span>
+        <span class="label" data-i18n="hero.stat2">Mercado LATAM 2024</span>
       </div>
       <div class="hero-stat reveal">
         <span class="num">3.9%</span>
@@ -461,79 +470,77 @@ tbody tr:last-child td{border-bottom:none}
       </div>
       <div class="hero-stat reveal">
         <span class="num">12+</span>
-        <span class="label">Aplicações Mapeadas</span>
+        <span class="label" data-i18n="hero.stat4">Aplica&ccedil;&otilde;es Mapeadas</span>
       </div>
     </div>
   </div>
   <div class="scroll-indicator">
-    <span>Scroll</span>
+    <span data-i18n="hero.scroll">Scroll</span>
     <div class="scroll-arrow"></div>
   </div>
 </section>
 
 <!-- EXECUTIVE SUMMARY -->
 <section id="executive">
-  <div class="glow-tr"></div><div class="glow-bl"></div>
   <div class="container">
     <div class="reveal">
-      <span class="section-label">01 Resumo Executivo</span>
-      <h2 class="section-title">O mercado de motores diesel na América Latina representa uma janela real de expansão para a MWM</h2>
-      <p class="section-desc">Com receita global de USD 3,2 bilhões em 2024, a região cresce a uma taxa composta anual de 3,9%. Brasil, México e Argentina concentram mais de 60% da demanda total. A MWM, com mais de 60 anos de operação e presença em 45 países, tem a infraestrutura, a reputação e o portfólio técnico para capturar fatias significativas nesse mercado.</p>
+      <span class="section-label" data-i18n="s1.label">01 Resumo Executivo</span>
+      <h2 class="section-title" data-i18n="s1.title">O mercado de motores diesel na Am&eacute;rica Latina representa uma janela real de expans&atilde;o para a MWM</h2>
+      <p class="section-desc" data-i18n="s1.desc">Com receita global de USD 3,2 bilh&otilde;es em 2024, a regi&atilde;o cresce a uma taxa composta anual de 3,9%. Brasil, M&eacute;xico e Argentina concentram mais de 60% da demanda total. A MWM, com mais de 60 anos de opera&ccedil;&atilde;o e presen&ccedil;a em 45 pa&iacute;ses, tem a infraestrutura, a reputa&ccedil;&atilde;o e o portf&oacute;lio t&eacute;cnico para capturar fatias significativas nesse mercado.</p>
     </div>
 
     <div class="exec-highlight stagger">
       <div class="exec-box reveal" style="--i:0">
         <span class="big-num">USD 3.207M</span>
-        <div class="exec-title-row"><div class="exec-icon" style="background:rgba(204,0,0,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--red)"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><h3>Tamanho do Mercado LATAM (2024)</h3></div>
-        <p>Motores diesel para aplicações industriais, agrícolas, geração de energia, construção e mineração na América do Sul e Central. Crescimento projetado para USD 4.2B até 2031.</p>
+        <div class="exec-title-row"><div class="exec-icon" style="background:rgba(204,0,0,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--red)"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><h3 data-i18n="s1.box1.title">Tamanho do Mercado LATAM (2024)</h3></div>
+        <p data-i18n="s1.box1.desc">Motores diesel para aplica&ccedil;&otilde;es industriais, agr&iacute;colas, gera&ccedil;&atilde;o de energia, constru&ccedil;&atilde;o e minera&ccedil;&atilde;o na Am&eacute;rica do Sul e Central. Crescimento projetado para USD 4.2B at&eacute; 2031.</p>
       </div>
       <div class="exec-box reveal" style="--i:1">
         <span class="big-num">+20%</span>
-        <div class="exec-title-row"><div class="exec-icon" style="background:rgba(34,197,94,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--green)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><h3>Crescimento da Receita MWM (2024)</h3></div>
-        <p>A MWM registrou o maior crescimento de receita em sua história recente, contribuindo para a geração de caixa recorde da controladora Tupy. O momento é favorável para escalar a operação regional.</p>
+        <div class="exec-title-row"><div class="exec-icon" style="background:rgba(34,197,94,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--green)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><h3 data-i18n="s1.box2.title">Crescimento da Receita MWM (2024)</h3></div>
+        <p data-i18n="s1.box2.desc">A MWM registrou o maior crescimento de receita em sua hist&oacute;ria recente, contribuindo para a gera&ccedil;&atilde;o de caixa recorde da controladora Tupy. O momento &eacute; favor&aacute;vel para escalar a opera&ccedil;&atilde;o regional.</p>
       </div>
       <div class="exec-box reveal" style="--i:2">
         <span class="big-num">1.300+</span>
-        <div class="exec-title-row"><div class="exec-icon" style="background:rgba(245,158,11,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--amber)"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h3>Pontos de Serviço</h3></div>
-        <p>Rede de distribuição e assistência técnica no Brasil e no exterior. Esse ativo logístico é um diferencial competitivo crítico para penetração em novos mercados latinos.</p>
+        <div class="exec-title-row"><div class="exec-icon" style="background:rgba(245,158,11,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--amber)"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h3 data-i18n="s1.box3.title">Pontos de Servi&ccedil;o</h3></div>
+        <p data-i18n="s1.box3.desc">Rede de distribui&ccedil;&atilde;o e assist&ecirc;ncia t&eacute;cnica no Brasil e no exterior. Esse ativo log&iacute;stico &eacute; um diferencial competitivo cr&iacute;tico para penetra&ccedil;&atilde;o em novos mercados latinos.</p>
       </div>
       <div class="exec-box reveal" style="--i:3">
         <span class="big-num">45+</span>
-        <div class="exec-title-row"><div class="exec-icon" style="background:rgba(59,130,246,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--blue)"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3>Países de Exportação</h3></div>
-        <p>A MWM já exporta para mais de 45 países, com destaque para Colômbia, Chile, Equador e Paraguai. A experiência com regulações e logística internacional já está consolidada.</p>
+        <div class="exec-title-row"><div class="exec-icon" style="background:rgba(59,130,246,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--blue)"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3 data-i18n="s1.box4.title">Pa&iacute;ses de Exporta&ccedil;&atilde;o</h3></div>
+        <p data-i18n="s1.box4.desc">A MWM j&aacute; exporta para mais de 45 pa&iacute;ses, com destaque para Col&ocirc;mbia, Chile, Equador e Paraguai. A experi&ecirc;ncia com regula&ccedil;&otilde;es e log&iacute;stica internacional j&aacute; est&aacute; consolidada.</p>
       </div>
     </div>
 
     <div class="engine-accent reveal">
       <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 6V4M10 6V4M14 6V4M18 6V4"/><path d="M6 18v2M18 18v2"/><circle cx="12" cy="12" r="3"/><path d="M12 9v0M15 12h0M12 15v0M9 12h0"/></svg>
-      <p>A MWM é o maior fabricante de motores diesel do hemisfério sul, com capacidade instalada para produzir mais de 100 mil unidades por ano. Hoje exporta para mais de 20 países, sendo que a América Latina concentra o maior potencial de crescimento incremental, especialmente nos segmentos de geração de energia e maquinário agrícola.</p>
+      <p data-i18n="s1.accent">A MWM &eacute; o maior fabricante de motores diesel do hemisf&eacute;rio sul, com capacidade instalada para produzir mais de 100 mil unidades por ano. Hoje exporta para mais de 20 pa&iacute;ses, sendo que a Am&eacute;rica Latina concentra o maior potencial de crescimento incremental, especialmente nos segmentos de gera&ccedil;&atilde;o de energia e maquin&aacute;rio agr&iacute;cola.</p>
     </div>
 
   </div>
 </section>
 
-<div class="section-divider"></div>
+<hr class="section-divider">
 
 <!-- MARKET OVERVIEW -->
 <section id="market">
-  <div class="glow-tl"></div><div class="glow-br"></div>
   <div class="container">
     <div class="reveal">
-      <span class="section-label">02 Visão do Mercado</span>
-      <h2 class="section-title">Dimensionamento por País e Projeções até 2031</h2>
-      <p class="section-desc">A tabela consolida os maiores mercados de motores diesel da América Latina. Dados baseados em tamanho de mercado estimado para 2024 (em milhões de dólares), taxa de crescimento composta anual, e projeção para 2030.</p>
+      <span class="section-label" data-i18n="s2.label">02 Vis&atilde;o do Mercado</span>
+      <h2 class="section-title" data-i18n="s2.title">Dimensionamento por Pa&iacute;s e Proje&ccedil;&otilde;es at&eacute; 2031</h2>
+      <p class="section-desc" data-i18n="s2.desc">A tabela consolida os maiores mercados de motores diesel da Am&eacute;rica Latina. Dados baseados em tamanho de mercado estimado para 2024 (em milh&otilde;es de d&oacute;lares), taxa de crescimento composta anual, e proje&ccedil;&atilde;o para 2030.</p>
     </div>
 
-    <div class="data-table-wrap reveal">
+    <div class="data-table-wrap reveal" data-swipe-hint="Deslize para ver mais &#x2192;">
       <table>
         <thead>
           <tr>
-            <th>País</th>
-            <th>Mercado 2024 (U$ M)</th>
-            <th>CAGR %</th>
-            <th>Proj. 2030 (U$ M)</th>
-            <th>Principais Setores</th>
-            <th>Prioridade MWM</th>
+            <th data-i18n="table.country">Pa&iacute;s</th>
+            <th data-i18n="table.market2024">Mercado 2024 (U$ M)</th>
+            <th data-i18n="table.cagr">CAGR %</th>
+            <th data-i18n="table.proj2030">Proj. 2030 (U$ M)</th>
+            <th data-i18n="table.sectors">Principais Setores</th>
+            <th data-i18n="table.priority">Prioridade MWM</th>
           </tr>
         </thead>
         <tbody>
@@ -719,7 +726,7 @@ tbody tr:last-child td{border-bottom:none}
 
     <!-- Market Distribution Visual -->
     <div style="margin-top:48px" class="reveal">
-      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px">Distribuição de Mercado por País (Top 6)</h3>
+      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" data-i18n="s2.dist.title">Distribui&ccedil;&atilde;o de Mercado por Pa&iacute;s (Top 6)</h3>
       <div class="opp-meter">
         <div class="opp-row">
           <span class="opp-label">Brasil</span>
@@ -760,22 +767,22 @@ tbody tr:last-child td{border-bottom:none}
 <section id="countries">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">03 Mapeamento dos 22 Países</span>
-      <h2 class="section-title">Classificação por Prioridade Estratégica</h2>
+      <span class="section-label" data-i18n="s3.label">03 Mapeamento dos 22 Pa&iacute;ses</span>
+      <h2 class="section-title" data-i18n="s3.title">Classifica&ccedil;&atilde;o por Prioridade Estrat&eacute;gica</h2>
 
     <div class="tier-legend reveal">
-      <div class="tier-legend-item"><div class="dot" style="background:var(--red)"></div> Tier 1 &mdash; Prioridade Máxima</div>
-      <div class="tier-legend-item"><div class="dot" style="background:var(--amber)"></div> Tier 2 &mdash; Alto Potencial</div>
-      <div class="tier-legend-item"><div class="dot" style="background:var(--gray)"></div> Tier 3 &mdash; Monitoramento</div>
+      <div class="tier-legend-item" data-i18n="s3.tier1legend"><div class="dot" style="background:var(--red)"></div> Tier 1 &mdash; Prioridade M&aacute;xima</div>
+      <div class="tier-legend-item" data-i18n="s3.tier2legend"><div class="dot" style="background:var(--amber)"></div> Tier 2 &mdash; Alto Potencial</div>
+      <div class="tier-legend-item" data-i18n="s3.tier3legend"><div class="dot" style="background:var(--gray)"></div> Tier 3 &mdash; Monitoramento</div>
     </div>
 
-      <p class="section-desc">Cada país foi classificado em Tiers de prioridade com base no tamanho de mercado, taxa de crescimento, presença de OEMs, complexidade regulatória e fit estratégico com o portfólio MWM.</p>
+      <p class="section-desc" data-i18n="s3.desc">Cada pa&iacute;s foi classificado em Tiers de prioridade com base no tamanho de mercado, taxa de crescimento, presen&ccedil;a de OEMs, complexidade regulat&oacute;ria e fit estrat&eacute;gico com o portf&oacute;lio MWM.</p>
     </div>
 
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px" class="reveal">
-      <span class="tag tag-red">Tier 1 &mdash; Prioridade Máxima</span>
-      <span class="tag tag-amber">Tier 2 &mdash; Expansão Ativa</span>
-      <span class="tag tag-blue">Tier 3 &mdash; Monitoramento</span>
+      <span class="tag tag-red" data-i18n="s3.tag1">Tier 1 &mdash; Prioridade M&aacute;xima</span>
+      <span class="tag tag-amber" data-i18n="s3.tag2">Tier 2 &mdash; Expans&atilde;o Ativa</span>
+      <span class="tag tag-blue" data-i18n="s3.tag3">Tier 3 &mdash; Monitoramento</span>
     </div>
 
     <div class="map-grid stagger">
@@ -805,75 +812,74 @@ tbody tr:last-child td{border-bottom:none}
 
     <!-- Tier 1 Detail Cards -->
     <div style="margin-top:48px">
-      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" class="reveal">Detalhamento Tier 1 &mdash; Mercados Prioritários</h3>
+      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" class="reveal" data-i18n="s3.detail.title">Detalhamento Tier 1 &mdash; Mercados Priorit&aacute;rios</h3>
       <div class="grid-2">
         <div class="card reveal">
           <div class="card-header">
             <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16"/></svg></div>
             <div>
-              <h3>Brasil &mdash; USD 1.372M</h3>
-              <span class="tag tag-red" style="font-size:10px">Base Operacional</span>
+              <h3 data-i18n="s3.br.title">Brasil &mdash; USD 1.372M</h3>
+              <span class="tag tag-red" style="font-size:10px" data-i18n="s3.br.tag">Base Operacional</span>
             </div>
           </div>
-          <p>A MWM já opera com três plantas de manufatura (São Paulo, Canoas, Córdoba). O Brasil responde por 42,8% do mercado LATAM de motores diesel. CAGR de 4,5% até 2031. Setores-chave: agronegócio (maior do mundo), construção civil, geração de energia. A MWM é líder independente no Mercosul com market share estimado de 18-22% em motores fora-de-estrada.</p>
+          <p data-i18n="s3.br.desc">A MWM j&aacute; opera com tr&ecirc;s plantas de manufatura (S&atilde;o Paulo, Canoas, C&oacute;rdoba). O Brasil responde por 42,8% do mercado LATAM de motores diesel. CAGR de 4,5% at&eacute; 2031. Setores-chave: agroneg&oacute;cio (maior do mundo), constru&ccedil;&atilde;o civil, gera&ccedil;&atilde;o de energia. A MWM &eacute; l&iacute;der independente no Mercosul com market share estimado de 18-22% em motores fora-de-estrada.</p>
         </div>
         <div class="card reveal">
           <div class="card-header">
             <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
             <div>
-              <h3>México &mdash; USD 820M</h3>
-              <span class="tag tag-red" style="font-size:10px">Alta Prioridade</span>
+              <h3 data-i18n="s3.mx.title">M&eacute;xico &mdash; USD 820M</h3>
+              <span class="tag tag-red" style="font-size:10px" data-i18n="s3.mx.tag">Alta Prioridade</span>
             </div>
           </div>
-          <p>Segundo maior mercado da região, com forte demanda dos setores automotivo, mineração e industrial. A proximidade com os EUA e o nearshoring aceleram investimentos em infraestrutura. CAGR projetado de 4,0%. Presença dominante de Cummins e Caterpillar, mas há espaço para um player com preço competitivo e suporte técnico regional.</p>
+          <p data-i18n="s3.mx.desc">Segundo maior mercado da regi&atilde;o, com forte demanda dos setores automotivo, minera&ccedil;&atilde;o e industrial. A proximidade com os EUA e o nearshoring aceleram investimentos em infraestrutura. CAGR projetado de 4,0%. Presen&ccedil;a dominante de Cummins e Caterpillar, mas h&aacute; espa&ccedil;o para um player com pre&ccedil;o competitivo e suporte t&eacute;cnico regional.</p>
         </div>
         <div class="card reveal">
           <div class="card-header">
             <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <div>
-              <h3>Argentina &mdash; USD 538M</h3>
-              <span class="tag tag-red" style="font-size:10px">Planta Ativa</span>
+              <h3 data-i18n="s3.ar.title">Argentina &mdash; USD 538M</h3>
+              <span class="tag tag-red" style="font-size:10px" data-i18n="s3.ar.tag">Planta Ativa</span>
             </div>
           </div>
-          <p>A MWM já possui planta em Córdoba, o que reduz barreiras de entrada. CAGR mais alto da região (4,8%), impulsionado por modernização ferroviária, agronegócio pampeano e novos projetos de infraestrutura. A Argentina é o terceiro mercado e tem potencial para se tornar hub de distribuição para países vizinhos.</p>
+          <p data-i18n="s3.ar.desc">A MWM j&aacute; possui planta em C&oacute;rdoba, o que reduz barreiras de entrada. CAGR mais alto da regi&atilde;o (4,8%), impulsionado por moderniza&ccedil;&atilde;o ferrovi&aacute;ria, agroneg&oacute;cio pampeano e novos projetos de infraestrutura. A Argentina &eacute; o terceiro mercado e tem potencial para se tornar hub de distribui&ccedil;&atilde;o para pa&iacute;ses vizinhos.</p>
         </div>
         <div class="card reveal">
           <div class="card-header">
             <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
             <div>
-              <h3>Colômbia &mdash; USD 285M</h3>
-              <span class="tag tag-red" style="font-size:10px">Mercado em Expansão</span>
+              <h3 data-i18n="s3.co.title">Col&ocirc;mbia &mdash; USD 285M</h3>
+              <span class="tag tag-red" style="font-size:10px" data-i18n="s3.co.tag">Mercado em Expans&atilde;o</span>
             </div>
           </div>
-          <p>Crescimento de 21% no volume de importações de motores diesel (HS 8408) entre 2023 e 2024. A China lidera as importações com 46% do volume, seguida por EUA (20%) e Japão (9%). Essa dependência de motores importados representa uma oportunidade direta para a MWM oferecer produção regional com suporte local.</p>
+          <p data-i18n="s3.co.desc">Crescimento de 21% no volume de importa&ccedil;&otilde;es de motores diesel (HS 8408) entre 2023 e 2024. A China lidera as importa&ccedil;&otilde;es com 46% do volume, seguida por EUA (20%) e Jap&atilde;o (9%). Essa depend&ecirc;ncia de motores importados representa uma oportunidade direta para a MWM oferecer produ&ccedil;&atilde;o regional com suporte local.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<hr class="section-divider">
 
 <!-- COMPETITORS -->
 <section id="competitors">
-  <div class="glow-center"></div><div class="glow-tl"></div>
   <div class="container">
     <div class="reveal">
-      <span class="section-label">04 Análise Competitiva</span>
-      <h2 class="section-title">Mapa de Concorrentes e Posicionamento</h2>
-      <p class="section-desc">Os principais fabricantes de motores diesel na América Latina competem por segmentos específicos. A tabela posiciona cada player em relação à força de mercado, faixa de potência, modelo de distribuição e vulnerabilidades que a MWM pode explorar.</p>
+      <span class="section-label" data-i18n="s4.label">04 An&aacute;lise Competitiva</span>
+      <h2 class="section-title" data-i18n="s4.title">Mapa de Concorrentes e Posicionamento</h2>
+      <p class="section-desc" data-i18n="s4.desc">Os principais fabricantes de motores diesel na Am&eacute;rica Latina competem por segmentos espec&iacute;ficos. A tabela posiciona cada player em rela&ccedil;&atilde;o &agrave; for&ccedil;a de mercado, faixa de pot&ecirc;ncia, modelo de distribui&ccedil;&atilde;o e vulnerabilidades que a MWM pode explorar.</p>
     </div>
 
-    <div class="data-table-wrap reveal">
+    <div class="data-table-wrap reveal" data-swipe-hint="Deslize para ver mais &#x2192;">
       <table>
         <thead>
           <tr>
-            <th>Fabricante</th>
-            <th>Market Share LATAM (est.)</th>
-            <th>Faixa de Potência</th>
-            <th>Força Principal</th>
-            <th>Distribuição</th>
-            <th>Vulnerabilidade</th>
+            <th data-i18n="ctable.maker">Fabricante</th>
+            <th data-i18n="ctable.share">Market Share LATAM (est.)</th>
+            <th data-i18n="ctable.power">Faixa de Pot&ecirc;ncia</th>
+            <th data-i18n="ctable.strength">For&ccedil;a Principal</th>
+            <th data-i18n="ctable.dist">Distribui&ccedil;&atilde;o</th>
+            <th data-i18n="ctable.vuln">Vulnerabilidade</th>
           </tr>
         </thead>
         <tbody>
@@ -963,7 +969,7 @@ tbody tr:last-child td{border-bottom:none}
 
     
     <div style="margin-top:48px">
-      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" class="reveal">Participação de Mercado Estimada (LATAM)</h3>
+      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" class="reveal" data-i18n="s4.share.title">Participa&ccedil;&atilde;o de Mercado Estimada (LATAM)</h3>
       <div style="display:flex;flex-direction:column;gap:10px" class="reveal">
         <div class="competitor-visual"><span class="cv-name">Cummins</span><div class="cv-track"><div class="cv-fill" style="width:100%;background:var(--amber)"></div></div><span class="cv-label">20-22%</span></div>
         <div class="competitor-visual"><span class="cv-name" style="color:var(--red);font-weight:700">MWM (Brasil)</span><div class="cv-track"><div class="cv-fill" style="width:91%;background:var(--red)"></div></div><span class="cv-label">18-22%</span></div>
@@ -978,44 +984,43 @@ tbody tr:last-child td{border-bottom:none}
 
     <!-- Competitive Advantages -->
     <div style="margin-top:48px">
-      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" class="reveal">Vantagens Competitivas MWM</h3>
+      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" class="reveal" data-i18n="s4.adv.title">Vantagens Competitivas MWM</h3>
       <div class="grid-3 stagger">
         <div class="card reveal" style="--i:0">
           <div class="card-header">
             <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-            <h3>Preço Competitivo</h3>
+            <h3 data-i18n="s4.adv1.title">Pre&ccedil;o Competitivo</h3>
           </div>
-          <p>Produção local no Brasil e Argentina reduz custos logísticos e tarifários. Posicionamento 15-25% abaixo de Cummins e Caterpillar em faixas equivalentes de potência, sem comprometer durabilidade.</p>
+          <p data-i18n="s4.adv1.desc">Produ&ccedil;&atilde;o local no Brasil e Argentina reduz custos log&iacute;sticos e tarif&aacute;rios. Posicionamento 15-25% abaixo de Cummins e Caterpillar em faixas equivalentes de pot&ecirc;ncia, sem comprometer durabilidade.</p>
         </div>
         <div class="card reveal" style="--i:1">
           <div class="card-header">
             <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-            <h3>Rede de Serviço Robusta</h3>
+            <h3 data-i18n="s4.adv2.title">Rede de Servi&ccedil;o Robusta</h3>
           </div>
-          <p>Mais de 1.300 pontos de serviço no Brasil e no mundo. Esse ativo logístico é o fator decisivo para OEMs que precisam de suporte pós-venda confiável em regiões remotas de mineração e agronegócio.</p>
+          <p data-i18n="s4.adv2.desc">Mais de 1.300 pontos de servi&ccedil;o no Brasil e no mundo. Esse ativo log&iacute;stico &eacute; o fator decisivo para OEMs que precisam de suporte p&oacute;s-venda confi&aacute;vel em regi&otilde;es remotas de minera&ccedil;&atilde;o e agroneg&oacute;cio.</p>
         </div>
         <div class="card reveal" style="--i:2">
           <div class="card-header">
             <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 16V8"/></svg></div>
-            <h3>Portfólio Integrado</h3>
+            <h3 data-i18n="s4.adv3.title">Portf&oacute;lio Integrado</h3>
           </div>
-          <p>Motores (70% da receita), geradores (12%) e peças de reposição (18%) formam um ecossistema completo. Poucos concorrentes oferecem essa trifeta com produção regional e suporte técnico unificado.</p>
+          <p data-i18n="s4.adv3.desc">Motores (70% da receita), geradores (12%) e pe&ccedil;as de reposi&ccedil;&atilde;o (18%) formam um ecossistema completo. Poucos concorrentes oferecem essa trifeta com produ&ccedil;&atilde;o regional e suporte t&eacute;cnico unificado.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<hr class="section-divider">
 
 <!-- OEM MAPPING -->
 <section id="oem">
-  <div class="glow-br"></div><div class="glow-tl"></div>
   <div class="container">
     <div class="reveal">
-      <span class="section-label">05 Mapeamento OEM</span>
-      <h2 class="section-title">Fabricantes de Equipamentos por Segmento</h2>
-      <p class="section-desc">Mapeamos os principais OEMs presentes na América Latina, o motor diesel que utilizam atualmente, e o nível de oportunidade para a MWM substituir ou complementar o fornecimento.</p>
+      <span class="section-label" data-i18n="s5.label">05 Mapeamento OEM</span>
+      <h2 class="section-title" data-i18n="s5.title">Fabricantes de Equipamentos por Segmento</h2>
+      <p class="section-desc" data-i18n="s5.desc">Mapeamos os principais OEMs presentes na Am&eacute;rica Latina, o motor diesel que utilizam atualmente, e o n&iacute;vel de oportunidade para a MWM substituir ou complementar o fornecimento.</p>
     </div>
 
     <div class="oem-grid stagger">
@@ -1106,16 +1111,15 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </section>
 
-<div class="section-divider"></div>
+<hr class="section-divider">
 
 <!-- APPLICATION SECTORS -->
 <section id="applications">
-  <div class="glow-tr"></div><div class="glow-bl"></div>
   <div class="container">
     <div class="reveal">
-      <span class="section-label">06 Aplicações por Setor</span>
-      <h2 class="section-title">12 Verticais de Aplicação Mapeadas</h2>
-      <p class="section-desc">Cada setor de aplicação do NCM 84089090 foi avaliado pelo tamanho da demanda, sazonalidade, concorrência instalada e potencial de penetração MWM.</p>
+      <span class="section-label" data-i18n="s6.label">06 Aplica&ccedil;&otilde;es por Setor</span>
+      <h2 class="section-title" data-i18n="s6.title">12 Verticais de Aplica&ccedil;&atilde;o Mapeadas</h2>
+      <p class="section-desc" data-i18n="s6.desc">Cada setor de aplica&ccedil;&atilde;o do NCM 84089090 foi avaliado pelo tamanho da demanda, sazonalidade, concorr&ecirc;ncia instalada e potencial de penetra&ccedil;&atilde;o MWM.</p>
     </div>
 
     <div class="grid-3 stagger">
@@ -1207,16 +1211,15 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </section>
 
-<div class="section-divider"></div>
+<hr class="section-divider">
 
 <!-- PRICING INTELLIGENCE -->
 <section id="pricing">
-  <div class="glow-center"></div><div class="glow-br"></div>
   <div class="container">
     <div class="reveal">
-      <span class="section-label">07 Inteligência de Preços</span>
-      <h2 class="section-title">Benchmarking de Preços por Faixa de Potência</h2>
-      <p class="section-desc">Preços de referência para motores diesel industriais e fora-de-estrada nos mercados latino-americanos. Valores em dólares americanos, baseados em preços de lista e negociações de volume reportados por distribuidores e plataformas de trade.</p>
+      <span class="section-label" data-i18n="s7.label">07 Intelig&ecirc;ncia de Pre&ccedil;os</span>
+      <h2 class="section-title" data-i18n="s7.title">Benchmarking de Pre&ccedil;os por Faixa de Pot&ecirc;ncia</h2>
+      <p class="section-desc" data-i18n="s7.desc">Pre&ccedil;os de refer&ecirc;ncia para motores diesel industriais e fora-de-estrada nos mercados latino-americanos. Valores em d&oacute;lares americanos, baseados em pre&ccedil;os de lista e negocia&ccedil;&otilde;es de volume reportados por distribuidores e plataformas de trade.</p>
     </div>
 
     <div class="pricing-grid">
@@ -1256,7 +1259,7 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </div>
 
-      <div class="pricing-card featured reveal">
+      <div class="pricing-card featured reveal" data-featured-label="MAIOR DEMANDA">
         <div class="pricing-icon" style="border-color:rgba(204,0,0,.5);background:rgba(204,0,0,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--red)"><rect x="3" y="7" width="18" height="10" rx="1"/><path d="M7 7V4M12 7V4M17 7V4M5 17v3M19 17v3"/><circle cx="12" cy="12" r="2"/></svg></div>
         <div class="pricing-range">100 a 200 HP</div>
         <div class="pricing-value">USD 12.000 &mdash; 28.000</div>
@@ -1330,16 +1333,15 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </section>
 
-<div class="section-divider"></div>
+<hr class="section-divider">
 
 <!-- OPPORTUNITY -->
-<section id="opportunity" style="overflow:hidden">
-  <div class="glow-tl"></div><div class="glow-tr"></div><div class="glow-bl"></div>
+<section id="opportunity">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">08 Dimensionamento de Oportunidade</span>
-      <h2 class="section-title">O que podemos construir para a MWM</h2>
-      <p class="section-desc">Com base nos dados consolidados, mapeamos as frentes de ação com maior retorno potencial e menor barreira de entrada. Cada oportunidade foi pontuada por atratividade de mercado, viabilidade operacional e fit estratégico com o portfólio atual da MWM.</p>
+      <span class="section-label" data-i18n="s8.label">08 Dimensionamento de Oportunidade</span>
+      <h2 class="section-title" data-i18n="s8.title">O que podemos construir para a MWM</h2>
+      <p class="section-desc" data-i18n="s8.desc">Com base nos dados consolidados, mapeamos as frentes de a&ccedil;&atilde;o com maior retorno potencial e menor barreira de entrada. Cada oportunidade foi pontuada por atratividade de mercado, viabilidade operacional e fit estrat&eacute;gico com o portf&oacute;lio atual da MWM.</p>
     </div>
 
     <div class="opp-meter reveal">
@@ -1377,30 +1379,30 @@ tbody tr:last-child td{border-bottom:none}
 
     <!-- Strategic Recommendations -->
     <div style="margin-top:56px">
-      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" class="reveal">Recomendações Estratégicas</h3>
+      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" class="reveal" data-i18n="s8.rec.title">Recomenda&ccedil;&otilde;es Estrat&eacute;gicas</h3>
       <div class="grid-2 stagger">
         <div class="card reveal" style="--i:0;border-left:3px solid var(--red)">
-          <h3 style="color:var(--red);margin-bottom:12px">Curto Prazo (6-12 meses)</h3>
-          <p>Expandir a operação de geradores para Colômbia, Chile e Peru, usando a infraestrutura de exportação existente. Esses três mercados representam USD 779M combinados e têm alta dependência de motores importados. A MWM já exporta para esses países, o que reduz o tempo de ativação.</p>
+          <h3 style="color:var(--red);margin-bottom:12px" data-i18n="s8.rec1.title">Curto Prazo (6-12 meses)</h3>
+          <p data-i18n="s8.rec1.desc">Expandir a opera&ccedil;&atilde;o de geradores para Col&ocirc;mbia, Chile e Peru, usando a infraestrutura de exporta&ccedil;&atilde;o existente. Esses tr&ecirc;s mercados representam USD 779M combinados e t&ecirc;m alta depend&ecirc;ncia de motores importados. A MWM j&aacute; exporta para esses pa&iacute;ses, o que reduz o tempo de ativa&ccedil;&atilde;o.</p>
         </div>
         <div class="card reveal" style="--i:1;border-left:3px solid var(--amber)">
-          <h3 style="color:var(--amber);margin-bottom:12px">Médio Prazo (12-24 meses)</h3>
-          <p>Estabelecer parcerias com fabricantes locais de bombas, compressores e equipamentos de construção no México. O nearshoring cria demanda crescente por motores com suporte regional. Posicionar a planta de Córdoba como hub de distribuição para o Cone Sul.</p>
+          <h3 style="color:var(--amber);margin-bottom:12px" data-i18n="s8.rec2.title">M&eacute;dio Prazo (12-24 meses)</h3>
+          <p data-i18n="s8.rec2.desc">Estabelecer parcerias com fabricantes locais de bombas, compressores e equipamentos de constru&ccedil;&atilde;o no M&eacute;xico. O nearshoring cria demanda crescente por motores com suporte regional. Posicionar a planta de C&oacute;rdoba como hub de distribui&ccedil;&atilde;o para o Cone Sul.</p>
         </div>
         <div class="card reveal" style="--i:2;border-left:3px solid var(--green)">
-          <h3 style="color:var(--green);margin-bottom:12px">Longo Prazo (24-36 meses)</h3>
-          <p>Desenvolver presença direta no México com escritório comercial e rede de dealers. Avaliar joint-ventures com OEMs regionais de equipamentos agrícolas para fornecimento exclusivo de motores na faixa de 80-200 HP, onde a MWM tem a melhor relação custo-benefício do mercado.</p>
+          <h3 style="color:var(--green);margin-bottom:12px" data-i18n="s8.rec3.title">Longo Prazo (24-36 meses)</h3>
+          <p data-i18n="s8.rec3.desc">Desenvolver presen&ccedil;a direta no M&eacute;xico com escrit&oacute;rio comercial e rede de dealers. Avaliar joint-ventures com OEMs regionais de equipamentos agr&iacute;colas para fornecimento exclusivo de motores na faixa de 80-200 HP, onde a MWM tem a melhor rela&ccedil;&atilde;o custo-benef&iacute;cio do mercado.</p>
         </div>
         <div class="card reveal" style="--i:3;border-left:3px solid var(--gold)">
-          <h3 style="color:var(--gold);margin-bottom:12px">Aftermarket (Imediato)</h3>
-          <p>O aftermarket de peças de reposição representa 18% da receita atual e tem margem superior a motores novos. Acelerar a distribuição de peças para a base instalada em todos os 22 países, com foco em disponibilidade e tempo de entrega. Peças genuínas MWM contra o mercado paralelo chinês.</p>
+          <h3 style="color:var(--gold);margin-bottom:12px" data-i18n="s8.rec4.title">Aftermarket (Imediato)</h3>
+          <p data-i18n="s8.rec4.desc">O aftermarket de pe&ccedil;as de reposi&ccedil;&atilde;o representa 18% da receita atual e tem margem superior a motores novos. Acelerar a distribui&ccedil;&atilde;o de pe&ccedil;as para a base instalada em todos os 22 pa&iacute;ses, com foco em disponibilidade e tempo de entrega. Pe&ccedil;as genu&iacute;nas MWM contra o mercado paralelo chin&ecirc;s.</p>
         </div>
       </div>
     </div>
 
     <!-- TAM/SAM/SOM -->
     <div style="margin-top:56px" class="reveal">
-      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px">Dimensionamento TAM / SAM / SOM</h3>
+      <h3 style="font-family:var(--font-head);font-size:20px;font-weight:600;color:var(--white);margin-bottom:24px" data-i18n="s8.tam.title">Dimensionamento TAM / SAM / SOM</h3>
 
       <div class="radar-grid stagger">
         <div class="radar-item reveal" style="--i:0">
@@ -1444,19 +1446,19 @@ tbody tr:last-child td{border-bottom:none}
 <!-- CTA -->
 <section class="cta-section">
   <div class="container reveal">
-    <h2>Pronto para expandir a presença MWM na América Latina?</h2>
+    <h2 data-i18n="cta.title">Pronto para expandir a presen&ccedil;a MWM na Am&eacute;rica Latina?</h2>
 
     <div class="cta-visual">
-      <div class="cta-num"><span class="n">22</span><span class="l">Países Mapeados</span></div>
-      <div class="cta-num"><span class="n">8</span><span class="l">Concorrentes</span></div>
-      <div class="cta-num"><span class="n">12</span><span class="l">Verticais</span></div>
+      <div class="cta-num"><span class="n">22</span><span class="l" data-i18n="cta.stat1">Pa&iacute;ses Mapeados</span></div>
+      <div class="cta-num"><span class="n">8</span><span class="l" data-i18n="cta.stat2">Concorrentes</span></div>
+      <div class="cta-num"><span class="n">12</span><span class="l" data-i18n="cta.stat3">Verticais</span></div>
       <div class="cta-num"><span class="n">U$ 3,2B</span><span class="l">TAM</span></div>
     </div>
 
-    <p style="max-width:600px;margin-left:auto;margin-right:auto">A V4 Bilinski pode conduzir a próxima fase: validação de mercado em campo, conexão com OEMs e estruturação do plano de entrada país a país.</p>
+    <p style="max-width:600px;margin-left:auto;margin-right:auto" data-i18n="cta.desc">A V4 Bilinski pode conduzir a pr&oacute;xima fase: valida&ccedil;&atilde;o de mercado em campo, conex&atilde;o com OEMs e estrutura&ccedil;&atilde;o do plano de entrada pa&iacute;s a pa&iacute;s.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-      <a href="https://wa.me/5511958326644" target="_blank" rel="noopener" class="btn btn-primary">Avançar com a V4 Bilinski</a>
-      <a href="#executive" class="btn btn-outline">Voltar ao Resumo</a>
+      <a href="https://wa.me/5511958326644" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="cta.btn1">Avan&ccedil;ar com a V4 Bilinski</a>
+      <a href="#executive" class="btn btn-outline" data-i18n="cta.btn2">Voltar ao Resumo</a>
     </div>
   </div>
 </section>
@@ -1465,14 +1467,14 @@ tbody tr:last-child td{border-bottom:none}
 <section class="sources" id="sources">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">Fontes e Referências</span>
-      <h2 class="section-title">Base de Dados Utilizada</h2>
-      <p class="section-desc">Todos os dados apresentados neste estudo foram compilados a partir das fontes abaixo. Estimativas de mercado são baseadas em reports públicos de consultorias especializadas e dados oficiais de comércio exterior.</p>
+      <span class="section-label" data-i18n="src.label">Fontes e Refer&ecirc;ncias</span>
+      <h2 class="section-title" data-i18n="src.title">Base de Dados Utilizada</h2>
+      <p class="section-desc" data-i18n="src.desc">Todos os dados apresentados neste estudo foram compilados a partir das fontes abaixo. Estimativas de mercado s&atilde;o baseadas em reports p&uacute;blicos de consultorias especializadas e dados oficiais de com&eacute;rcio exterior.</p>
     </div>
 
     <!-- Dimensionamento de Mercado -->
     <div class="src-category reveal">
-      <h3 class="src-category-title">Dimensionamento de mercado</h3>
+      <h3 class="src-category-title" data-i18n="src.cat1">Dimensionamento de mercado</h3>
       <div class="src-grid stagger">
         <a href="https://www.cognitivemarketresearch.com/regional-analysis/south-america-diesel-engine-market-report" target="_blank" class="src-card reveal" style="--i:0">
           <span class="src-tag src-tag-market">MERCADO</span>
@@ -1509,7 +1511,7 @@ tbody tr:last-child td{border-bottom:none}
 
     <!-- Concorrentes e Indústria -->
     <div class="src-category reveal">
-      <h3 class="src-category-title">Concorrentes e indústria</h3>
+      <h3 class="src-category-title" data-i18n="src.cat2">Concorrentes e ind&uacute;stria</h3>
       <div class="src-grid stagger">
         <a href="https://www.equipmentworld.com/maintenance/components/article/15773905/top-diesel-engine-manufacturers-for-construction-equipment" target="_blank" class="src-card reveal" style="--i:0">
           <span class="src-tag src-tag-competitor">CONCORRÊNCIA</span>
@@ -1531,7 +1533,7 @@ tbody tr:last-child td{border-bottom:none}
 
     <!-- MWM e Operação -->
     <div class="src-category reveal">
-      <h3 class="src-category-title">MWM e operação</h3>
+      <h3 class="src-category-title" data-i18n="src.cat3">MWM e opera&ccedil;&atilde;o</h3>
       <div class="src-grid stagger">
         <a href="https://www.geradoresmwm.com.br/noticias/37/MWM-PRODUZIR-GERADORES-DE-ENERGIA-NO-BRASIL/" target="_blank" class="src-card reveal" style="--i:0">
           <span class="src-tag src-tag-company">EMPRESA</span>
@@ -1553,7 +1555,7 @@ tbody tr:last-child td{border-bottom:none}
 
     <!-- Comércio Exterior -->
     <div class="src-category reveal">
-      <h3 class="src-category-title">Comércio exterior e regulação</h3>
+      <h3 class="src-category-title" data-i18n="src.cat4">Com&eacute;rcio exterior e regula&ccedil;&atilde;o</h3>
       <div class="src-grid stagger">
         <a href="https://www.volza.com/p/diesel-or-engine-or-oil/import/import-in-colombia/hsn-code-8408/" target="_blank" class="src-card reveal" style="--i:0">
           <span class="src-tag src-tag-trade">COMÉRCIO</span>
@@ -1584,9 +1586,9 @@ tbody tr:last-child td{border-bottom:none}
         <div style="width:1px;height:24px;background:rgba(255,255,255,.15)"></div>
         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgMTAwIiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8Y2xpcFBhdGggaWQ9Im13bUNsaXAiPgogICAgICA8cmVjdCB4PSIwIiB5PSIxOCIgd2lkdGg9IjMyMCIgaGVpZ2h0PSI4MiIvPgogICAgPC9jbGlwUGF0aD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSIxMDAiIHJ4PSI0IiBmaWxsPSIjMDAwMDAwIi8+CiAgPHRleHQgeD0iMTIiIHk9IjE2IiBmb250LWZhbWlseT0iQXJpYWwsIEhlbHZldGljYSwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjgwMCIgZm9udC1zaXplPSIxMyIgZmlsbD0iI0ZGRkZGRiIgbGV0dGVyLXNwYWNpbmc9IjIuNSI+R0VSQURPUkVTPC90ZXh0PgogIDxnIGNsaXAtcGF0aD0idXJsKCNtd21DbGlwKSI+CiAgICA8cG9seWdvbiBwb2ludHM9IjEyLDkwIDEyLDI4IDQwLDI4IDU4LDYwIDc2LDI4IDEwNCwyOCAxMDQsOTAgODIsOTAgODIsNTIgNjQsODAgNTIsODAgMzQsNTIgMzQsOTAiIGZpbGw9IiNGRkZGRkYiLz4KICAgIDxwb2x5Z29uIHBvaW50cz0iMTEwLDI4IDEzMCwyOCAxNDgsNjggMTU4LDQ0IDE0OCwyOCAxNzIsMjggMTgwLDUwIDE4OCwyOCAyMTIsMjggMjAyLDQ0IDE5Miw2OCAyMTAsMjggMjMwLDI4IDE5OCw5MCAxNzgsOTAgMTY4LDY0IDE1OCw5MCAxMzgsOTAiIGZpbGw9IiNGRkZGRkYiLz4KICAgIDxwb2x5Z29uIHBvaW50cz0iMjM2LDkwIDIzNiwyOCAyNjQsMjggMjgyLDYwIDMwMCwyOCAzMjAsMjggMzIwLDkwIDMwMCw5MCAzMDAsNTIgMjg0LDgwIDI3Miw4MCAyNTYsNTIgMjU2LDkwIiBmaWxsPSIjRkZGRkZGIi8+CiAgICA8cmVjdCB4PSIwIiB5PSI1MiIgd2lkdGg9IjMyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjMDAwMDAwIi8+CiAgICA8cmVjdCB4PSIwIiB5PSI2MiIgd2lkdGg9IjMyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjMDAwMDAwIi8+CiAgICA8cmVjdCB4PSIwIiB5PSI3MiIgd2lkdGg9IjMyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjMDAwMDAwIi8+CiAgICA8cmVjdCB4PSIwIiB5PSI4MiIgd2lkdGg9IjMyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjMDAwMDAwIi8+CiAgPC9nPgo8L3N2Zz4=" alt="MWM Motores" style="height:36px;width:auto;opacity:.8">
       </div>
-    <p style="margin-bottom:4px">Estudo de Mercado LATAM &mdash; Motores Diesel NCM 84089090</p>
-    <p>Elaborado por <a href="https://v4bilinski.github.io/saas-contabil/" target="_blank">V4 Bilinski &amp; Co</a> para <a href="https://mwm.com.br/pt/" target="_blank">MWM Motores e Geradores</a></p>
-    <p style="margin-top:12px;font-size:11px;color:var(--gray-md)">Dados compilados em março de 2025. Valores de mercado são estimativas baseadas em fontes públicas.</p>
+    <p style="margin-bottom:4px" data-i18n="footer.line1">Estudo de Mercado LATAM &mdash; Motores Diesel NCM 84089090</p>
+    <p data-i18n-html="1">Elaborado por <a href="https://v4bilinski.github.io/saas-contabil/" target="_blank">V4 Bilinski &amp; Co</a> para <a href="https://mwm.com.br/pt/" target="_blank">MWM Motores e Geradores</a></p>
+    <p style="margin-top:12px;font-size:11px;color:var(--gray-md)" data-i18n="footer.line3">Dados compilados em mar&ccedil;o de 2025. Valores de mercado s&atilde;o estimativas baseadas em fontes p&uacute;blicas.</p>
   </div>
 </footer>
 
@@ -1715,6 +1717,487 @@ document.querySelectorAll('.country-pill').forEach(pill => {
     this.style.animation = 'glow .6s ease';
   });
 });
+</script>
+
+<script>
+// ========== LANGUAGE SELECTOR ==========
+(function(){
+  var currentLang = 'pt';
+
+  var translations = {
+    en: {
+      // Nav
+      'nav.executive': 'Executive Summary',
+      'nav.market': 'Market',
+      'nav.countries': 'Countries',
+      'nav.competitors': 'Competitors',
+      'nav.oem': 'OEMs',
+      'nav.pricing': 'Pricing',
+      'nav.opportunity': 'Opportunity',
+      'nav.sources': 'Sources',
+      // Hero
+      'hero.float3': '22 Countries',
+      'hero.badge': 'LATAM Market Study 2025',
+      'hero.sub': 'Competitive analysis of 22 countries, OEM mapping, pricing intelligence and opportunity sizing for MWM expansion in Latin America.',
+      'hero.stat1': 'Countries Analyzed',
+      'hero.stat2': 'LATAM Market 2024',
+      'hero.stat4': 'Applications Mapped',
+      'hero.scroll': 'Scroll',
+      // Section 1 - Executive Summary
+      's1.label': '01 Executive Summary',
+      's1.title': 'The diesel engine market in Latin America represents a real expansion window for MWM',
+      's1.desc': 'With global revenue of USD 3.2 billion in 2024, the region grows at a compound annual rate of 3.9%. Brazil, Mexico and Argentina account for over 60% of total demand. MWM, with over 60 years of operations and presence in 45 countries, has the infrastructure, reputation and technical portfolio to capture significant shares of this market.',
+      's1.box1.title': 'LATAM Market Size (2024)',
+      's1.box1.desc': 'Diesel engines for industrial, agricultural, power generation, construction and mining applications in South and Central America. Growth projected to USD 4.2B by 2031.',
+      's1.box2.title': 'MWM Revenue Growth (2024)',
+      's1.box2.desc': 'MWM recorded its highest revenue growth in recent history, contributing to record cash generation for parent company Tupy. The timing is favorable to scale regional operations.',
+      's1.box3.title': 'Service Points',
+      's1.box3.desc': 'Distribution and technical service network in Brazil and abroad. This logistics asset is a critical competitive differentiator for penetration into new Latin American markets.',
+      's1.box4.title': 'Export Countries',
+      's1.box4.desc': 'MWM already exports to over 45 countries, with emphasis on Colombia, Chile, Ecuador and Paraguay. The experience with international regulations and logistics is already consolidated.',
+      's1.accent': 'MWM is the largest diesel engine manufacturer in the Southern Hemisphere, with installed capacity to produce over 100 thousand units per year. Today it exports to over 20 countries, with Latin America concentrating the highest incremental growth potential, especially in the power generation and agricultural machinery segments.',
+      // Section 2 - Market Overview
+      's2.label': '02 Market Overview',
+      's2.title': 'Country Sizing and Projections to 2031',
+      's2.desc': 'The table consolidates the largest diesel engine markets in Latin America. Data based on estimated market size for 2024 (in millions of dollars), compound annual growth rate, and projection to 2030.',
+      's2.dist.title': 'Market Distribution by Country (Top 6)',
+      // Market table headers
+      'table.country': 'Country',
+      'table.market2024': 'Market 2024 (U$ M)',
+      'table.cagr': 'CAGR %',
+      'table.proj2030': 'Proj. 2030 (U$ M)',
+      'table.sectors': 'Key Sectors',
+      'table.priority': 'MWM Priority',
+      // Section 3 - Countries
+      's3.label': '03 Mapping of 22 Countries',
+      's3.title': 'Classification by Strategic Priority',
+      's3.tier1legend': '<div class="dot" style="background:var(--red)"></div> Tier 1 \u2014 Top Priority',
+      's3.tier2legend': '<div class="dot" style="background:var(--amber)"></div> Tier 2 \u2014 High Potential',
+      's3.tier3legend': '<div class="dot" style="background:var(--gray)"></div> Tier 3 \u2014 Monitoring',
+      's3.desc': 'Each country was classified into priority Tiers based on market size, growth rate, OEM presence, regulatory complexity and strategic fit with the MWM portfolio.',
+      's3.tag1': 'Tier 1 \u2014 Top Priority',
+      's3.tag2': 'Tier 2 \u2014 Active Expansion',
+      's3.tag3': 'Tier 3 \u2014 Monitoring',
+      's3.detail.title': 'Tier 1 Detail \u2014 Priority Markets',
+      's3.br.title': 'Brazil \u2014 USD 1,372M',
+      's3.br.tag': 'Operational Base',
+      's3.br.desc': 'MWM already operates with three manufacturing plants (S\u00e3o Paulo, Canoas, C\u00f3rdoba). Brazil accounts for 42.8% of the LATAM diesel engine market. CAGR of 4.5% through 2031. Key sectors: agribusiness (world\'s largest), civil construction, power generation. MWM is the independent leader in Mercosur with an estimated 18-22% market share in off-road engines.',
+      's3.mx.title': 'Mexico \u2014 USD 820M',
+      's3.mx.tag': 'High Priority',
+      's3.mx.desc': 'Second largest market in the region, with strong demand from automotive, mining and industrial sectors. Proximity to the US and nearshoring accelerate infrastructure investments. Projected CAGR of 4.0%. Dominant presence of Cummins and Caterpillar, but there is room for a player with competitive pricing and regional technical support.',
+      's3.ar.title': 'Argentina \u2014 USD 538M',
+      's3.ar.tag': 'Active Plant',
+      's3.ar.desc': 'MWM already has a plant in C\u00f3rdoba, which reduces entry barriers. Highest CAGR in the region (4.8%), driven by railway modernization, Pampas agribusiness and new infrastructure projects. Argentina is the third market and has potential to become a distribution hub for neighboring countries.',
+      's3.co.title': 'Colombia \u2014 USD 285M',
+      's3.co.tag': 'Expanding Market',
+      's3.co.desc': '21% growth in diesel engine import volume (HS 8408) between 2023 and 2024. China leads imports with 46% of volume, followed by the US (20%) and Japan (9%). This dependence on imported engines represents a direct opportunity for MWM to offer regional production with local support.',
+      // Section 4 - Competitors
+      's4.label': '04 Competitive Analysis',
+      's4.title': 'Competitor Map and Positioning',
+      's4.desc': 'The main diesel engine manufacturers in Latin America compete for specific segments. The table positions each player in relation to market strength, power range, distribution model and vulnerabilities that MWM can exploit.',
+      's4.share.title': 'Estimated Market Share (LATAM)',
+      's4.adv.title': 'MWM Competitive Advantages',
+      's4.adv1.title': 'Competitive Pricing',
+      's4.adv1.desc': 'Local production in Brazil and Argentina reduces logistics and tariff costs. Positioned 15-25% below Cummins and Caterpillar in equivalent power ranges, without compromising durability.',
+      's4.adv2.title': 'Robust Service Network',
+      's4.adv2.desc': 'Over 1,300 service points in Brazil and worldwide. This logistics asset is the decisive factor for OEMs that need reliable after-sales support in remote mining and agribusiness regions.',
+      's4.adv3.title': 'Integrated Portfolio',
+      's4.adv3.desc': 'Engines (70% of revenue), generators (12%) and spare parts (18%) form a complete ecosystem. Few competitors offer this trifecta with regional production and unified technical support.',
+      // Competitor table headers
+      'ctable.maker': 'Manufacturer',
+      'ctable.share': 'LATAM Market Share (est.)',
+      'ctable.power': 'Power Range',
+      'ctable.strength': 'Main Strength',
+      'ctable.dist': 'Distribution',
+      'ctable.vuln': 'Vulnerability',
+      // Section 5 - OEM
+      's5.label': '05 OEM Mapping',
+      's5.title': 'Equipment Manufacturers by Segment',
+      's5.desc': 'We mapped the main OEMs present in Latin America, the diesel engine they currently use, and the level of opportunity for MWM to replace or complement the supply.',
+      // Section 6 - Applications
+      's6.label': '06 Applications by Sector',
+      's6.title': '12 Application Verticals Mapped',
+      's6.desc': 'Each application sector for NCM 84089090 was evaluated by demand size, seasonality, installed competition and MWM penetration potential.',
+      // Section 7 - Pricing
+      's7.label': '07 Pricing Intelligence',
+      's7.title': 'Price Benchmarking by Power Range',
+      's7.desc': 'Reference prices for industrial and off-road diesel engines in Latin American markets. Values in US dollars, based on list prices and volume negotiations reported by distributors and trade platforms.',
+      // Section 8 - Opportunity
+      's8.label': '08 Opportunity Sizing',
+      's8.title': 'What we can build for MWM',
+      's8.desc': 'Based on consolidated data, we mapped the action fronts with the highest potential return and lowest entry barrier. Each opportunity was scored by market attractiveness, operational feasibility and strategic fit with MWM\'s current portfolio.',
+      's8.rec.title': 'Strategic Recommendations',
+      's8.rec1.title': 'Short Term (6-12 months)',
+      's8.rec1.desc': 'Expand generator operations to Colombia, Chile and Peru, using existing export infrastructure. These three markets represent a combined USD 779M and have high dependence on imported engines. MWM already exports to these countries, which reduces activation time.',
+      's8.rec2.title': 'Medium Term (12-24 months)',
+      's8.rec2.desc': 'Establish partnerships with local pump, compressor and construction equipment manufacturers in Mexico. Nearshoring creates growing demand for engines with regional support. Position the C\u00f3rdoba plant as a distribution hub for the Southern Cone.',
+      's8.rec3.title': 'Long Term (24-36 months)',
+      's8.rec3.desc': 'Develop direct presence in Mexico with a commercial office and dealer network. Evaluate joint ventures with regional agricultural equipment OEMs for exclusive engine supply in the 80-200 HP range, where MWM has the best cost-benefit ratio in the market.',
+      's8.rec4.title': 'Aftermarket (Immediate)',
+      's8.rec4.desc': 'The aftermarket for spare parts represents 18% of current revenue and has higher margins than new engines. Accelerate parts distribution to the installed base across all 22 countries, focusing on availability and delivery time. Genuine MWM parts against the Chinese parallel market.',
+      's8.tam.title': 'TAM / SAM / SOM Sizing',
+      // CTA
+      'cta.title': 'Ready to expand MWM\'s presence in Latin America?',
+      'cta.stat1': 'Countries Mapped',
+      'cta.stat2': 'Competitors',
+      'cta.stat3': 'Verticals',
+      'cta.desc': 'V4 Bilinski can lead the next phase: in-field market validation, OEM connections and structuring the country-by-country entry plan.',
+      'cta.btn1': 'Proceed with V4 Bilinski',
+      'cta.btn2': 'Back to Summary',
+      // Sources
+      'src.label': 'Sources and References',
+      'src.title': 'Database Used',
+      'src.desc': 'All data presented in this study was compiled from the sources below. Market estimates are based on public reports from specialized consultancies and official foreign trade data.',
+      'src.cat1': 'Market sizing',
+      'src.cat2': 'Competitors and industry',
+      'src.cat3': 'MWM and operations',
+      'src.cat4': 'Foreign trade and regulation',
+      // Footer
+      'footer.line1': 'LATAM Market Study \u2014 Diesel Engines NCM 84089090',
+      'footer.line3': 'Data compiled in March 2025. Market values are estimates based on public sources.'
+    }
+  };
+
+  // PT originals (auto-captured on first load)
+  var ptOriginals = {};
+
+  // Text map for walkAndTranslate (PT -> EN) for content not tagged with data-i18n
+  var textMap = {
+    // Table sectors
+    'Agro, Construção, Energia': 'Agri, Construction, Energy',
+    'Automotivo, Mineração, Indústria': 'Automotive, Mining, Industry',
+    'Agro, Ferrovias, Construção': 'Agri, Railways, Construction',
+    'Mineração, Agro, Energia': 'Mining, Agri, Energy',
+    'Mineração (Cobre), Construção': 'Mining (Copper), Construction',
+    'Mineração (Cobre), Agro': 'Mining (Copper), Agri',
+    'Petróleo, Energia': 'Oil, Energy',
+    'Agro, Mineração, Energia': 'Agri, Mining, Energy',
+    'Construção, Energia, Turismo': 'Construction, Energy, Tourism',
+    'Agro, Construção': 'Agri, Construction',
+    'Mineração, Agro': 'Mining, Agri',
+    'Agro, Energia': 'Agri, Energy',
+    'Construção, Energia': 'Construction, Energy',
+    'Construção, Logística, Energia': 'Construction, Logistics, Energy',
+    'Indústria, Energia': 'Industry, Energy',
+    'Energia, Construção': 'Energy, Construction',
+    'Mineração, Energia': 'Mining, Energy',
+    'Petróleo, Energia, Construção': 'Oil, Energy, Construction',
+    // Competitor table cells
+    'Amplitude de portfólio': 'Portfolio breadth',
+    'Integração com equipamentos': 'Equipment integration',
+    'Custo-benefício': 'Cost-benefit',
+    'Forte no agro': 'Strong in agri',
+    'Portfólio diversificado': 'Diversified portfolio',
+    'Compactos, baixa emissão': 'Compact, low emission',
+    'Compactos, confiabilidade': 'Compact, reliability',
+    'Marítimo, geração': 'Marine, generation',
+    'Pequeno porte, agro': 'Small scale, agri',
+    'Custo, rede de serviço': 'Cost, service network',
+    'Direta + Dealers': 'Direct + Dealers',
+    'Dealers exclusivos': 'Exclusive dealers',
+    'OEMs + Aftermarket': 'OEMs + Aftermarket',
+    'Rede John Deere': 'John Deere network',
+    'OEMs CNH + independentes': 'CNH OEMs + independent',
+    'Dealers regionais': 'Regional dealers',
+    'OEMs + Dealers': 'OEMs + Dealers',
+    'Rede Volvo': 'Volvo network',
+    '1.300+ pontos': '1,300+ points',
+    'Preço premium, lead time': 'Premium price, lead time',
+    'Dependência de OEM próprio': 'Own OEM dependency',
+    'Suporte local limitado': 'Limited local support',
+    'Pouco presente fora do agro': 'Limited presence outside agri',
+    'Marca menos conhecida': 'Less known brand',
+    'Rede de serviço pequena': 'Small service network',
+    'Limitado a baixa potência': 'Limited to low power',
+    'Focado em nichos': 'Focused on niches',
+    'Presença limitada': 'Limited presence',
+    'Oportunidade de expansão': 'Expansion opportunity',
+    // OEM card labels
+    'Segmento': 'Segment',
+    'Países': 'Countries',
+    'Motor Atual': 'Current Engine',
+    'Potência': 'Power',
+    'Oportunidade MWM': 'MWM Opportunity',
+    'Máquinas Agrícolas': 'Agricultural Machinery',
+    'Agro + Construção': 'Agri + Construction',
+    'Construção + Mineração': 'Construction + Mining',
+    'Bombas, Compressores, Geradores': 'Pumps, Compressors, Generators',
+    'Todos os 22 países': 'All 22 countries',
+    'Brasil, Argentina, Chile, Peru': 'Brazil, Argentina, Chile, Peru',
+    'Brasil, Argentina, México, Colômbia': 'Brazil, Argentina, Mexico, Colombia',
+    'Chile, Peru, Brasil, México': 'Chile, Peru, Brazil, Mexico',
+    'Brasil, México, Argentina, Colômbia': 'Brazil, Mexico, Argentina, Colombia',
+    'Brasil, Argentina, México': 'Brazil, Argentina, Mexico',
+    'Alta Oportunidade': 'High Opportunity',
+    'Média Oportunidade': 'Medium Opportunity',
+    'Baixa Oportunidade': 'Low Opportunity',
+    'Fornecimento para linhas compactas e geração de energia em fazendas': 'Supply for compact lines and farm power generation',
+    'Aftermarket e peças de reposição. Geradores para dealers.': 'Aftermarket and spare parts. Generators for dealers.',
+    'Geração de energia em sites de mineração. Aftermarket compacto.': 'Power generation at mining sites. Compact aftermarket.',
+    'Equipamentos de suporte e geração em sites de obra.': 'Support equipment and generation at construction sites.',
+    'Substituição de motores chineses por produção regional com garantia e suporte.': 'Replacement of Chinese engines with regional production with warranty and support.',
+    'Limitada. Motor é core strategy. Foco em aftermarket de longo prazo.': 'Limited. Engine is core strategy. Focus on long-term aftermarket.',
+    'FPT Industrial (verticalizado)': 'FPT Industrial (vertically integrated)',
+    'Cat / Perkins (verticalizado)': 'Cat / Perkins (vertically integrated)',
+    'John Deere Power Systems (verticalizado)': 'John Deere Power Systems (vertically integrated)',
+    'Diversos (importados da China)': 'Various (imported from China)',
+    'Fabricantes Locais (Diversos)': 'Local Manufacturers (Various)',
+    // Application card titles and descriptions
+    'Maior Demanda': 'Highest Demand',
+    'Equipamentos de Construção': 'Construction Equipment',
+    'Geração de Energia': 'Power Generation',
+    'Mineração': 'Mining',
+    "Bombas d'Água": 'Water Pumps',
+    'Compressores de Ar': 'Air Compressors',
+    'Equipamentos Rodoviários': 'Road Equipment',
+    'Bombas de Incêndio': 'Fire Pumps',
+    'Empilhadeiras': 'Forklifts',
+    'Equipamentos Industriais': 'Industrial Equipment',
+    'Retroescavadeiras': 'Backhoe Loaders',
+    'Torres Anti-Congelamento': 'Anti-Frost Towers',
+    'Tratores, colheitadeiras, pulverizadores. O agronegócio responde por 35-40% da demanda total de motores diesel na LATAM. Brasil e Argentina são os maiores mercados. Faixa predominante: 80-250 HP.': 'Tractors, harvesters, sprayers. Agribusiness accounts for 35-40% of total diesel engine demand in LATAM. Brazil and Argentina are the largest markets. Predominant range: 80-250 HP.',
+    'Retroescavadeiras, escavadeiras, carregadeiras. O setor de construção cresce com investimentos em infraestrutura no México, Brasil e Colômbia. Faixa: 60-300 HP.': 'Backhoe loaders, excavators, wheel loaders. The construction sector grows with infrastructure investments in Mexico, Brazil and Colombia. Range: 60-300 HP.',
+    'Grupos geradores diesel de 10 a 1.250 kVA. Demanda crítica em regiões com infraestrutura elétrica frágil. MWM já atua com linha completa de geradores. Faixa: 40-600 HP.': 'Diesel generator sets from 10 to 1,250 kVA. Critical demand in regions with fragile electrical infrastructure. MWM already operates with a complete generator line. Range: 40-600 HP.',
+    'Equipamentos de perfuração, transporte e processamento. Chile e Peru lideram com cobre. Colômbia e Bolívia com outros minerais. Faixa: 100-500 HP.': 'Drilling, transport and processing equipment. Chile and Peru lead with copper. Colombia and Bolivia with other minerals. Range: 100-500 HP.',
+    'Irrigação agrícola, abastecimento urbano e rural. Demanda constante em regiões áridas e semiáridas. Forte potencial no Nordeste brasileiro, México e Peru. Faixa: 40-150 HP.': 'Agricultural irrigation, urban and rural water supply. Constant demand in arid and semi-arid regions. Strong potential in Brazil\'s Northeast, Mexico and Peru. Range: 40-150 HP.',
+    'Aplicações industriais e de construção civil. Mercado estável com substituição cíclica. Faixa: 50-200 HP.': 'Industrial and civil construction applications. Stable market with cyclical replacement. Range: 50-200 HP.',
+    'Máquinas de pavimentação, rolos compactadores, fresadoras. Demanda ligada a investimentos públicos em infraestrutura. Faixa: 80-300 HP.': 'Paving machines, compactor rollers, milling machines. Demand linked to public infrastructure investments. Range: 80-300 HP.',
+    'Equipamentos críticos para segurança. Regulamentação obrigatória em edifícios comerciais e industriais em todos os países. Faixa: 50-150 HP.': 'Critical safety equipment. Mandatory regulation in commercial and industrial buildings in all countries. Range: 50-150 HP.',
+    'Logística, armazéns, portos. Mercado crescente com expansão do e-commerce na região. Faixa: 40-120 HP.': 'Logistics, warehouses, ports. Growing market with e-commerce expansion in the region. Range: 40-120 HP.',
+    'Geradores de processo, acionamentos mecânicos, sistemas de backup. Demanda transversal em todos os países. Faixa: 50-300 HP.': 'Process generators, mechanical drives, backup systems. Cross-sector demand in all countries. Range: 50-300 HP.',
+    'Equipamento versátil para construção e serviços públicos. Demanda estável na América Central e Caribe. Faixa: 70-110 HP.': 'Versatile equipment for construction and public services. Stable demand in Central America and the Caribbean. Range: 70-110 HP.',
+    'Proteção de culturas contra geada em regiões agrícolas de altitude. Demanda sazonal concentrada em Chile, Argentina e sul do Brasil. Faixa: 100-200 HP.': 'Crop frost protection in high-altitude agricultural regions. Seasonal demand concentrated in Chile, Argentina and southern Brazil. Range: 100-200 HP.',
+    // Pricing
+    'por unidade, preço de lista': 'per unit, list price',
+    "Bombas d'água": 'Water pumps',
+    'Compressores': 'Compressors',
+    'Geradores compactos': 'Compact generators',
+    'Bombas de incêndio': 'Fire pumps',
+    'Máquinas agrícolas': 'Agricultural machinery',
+    'Geradores médios': 'Medium generators',
+    'Equipamentos rodoviários': 'Road equipment',
+    'Torres anti-congelamento': 'Anti-frost towers',
+    'Mineração pesada': 'Heavy mining',
+    'Construção de grande porte': 'Large-scale construction',
+    'Geradores industriais': 'Industrial generators',
+    'MAIOR DEMANDA': 'HIGHEST DEMAND',
+    // Opportunity meter labels
+    'Agronegócio': 'Agribusiness',
+    'Bombas e Compressores': 'Pumps and Compressors',
+    'Construção Civil': 'Civil Construction',
+    'Aftermarket / Peças': 'Aftermarket / Parts',
+    // TAM/SAM/SOM descriptions
+    'Mercado total endereçável de motores diesel na LATAM': 'Total addressable market for diesel engines in LATAM',
+    'Mercado acessível na faixa 40-310 HP (portfólio MWM)': 'Accessible market in the 40-310 HP range (MWM portfolio)',
+    'Meta realista de captura em 36 meses nos Tiers 1 e 2': 'Realistic capture target in 36 months in Tiers 1 and 2',
+    'Todos os motores diesel NCM 84089090 nos 22 países': 'All diesel engines NCM 84089090 in 22 countries',
+    'Segmentos onde MWM compete (40-310 HP, aplicações alvo)': 'Segments where MWM competes (40-310 HP, target applications)',
+    'Meta realista de captura em 5 anos (Tier 1 + Tier 2)': 'Realistic capture target in 5 years (Tier 1 + Tier 2)',
+    // Source tags
+    'MERCADO': 'MARKET',
+    'CONCORRÊNCIA': 'COMPETITION',
+    'INDÚSTRIA': 'INDUSTRY',
+    'EMPRESA': 'COMPANY',
+    'COMÉRCIO': 'TRADE',
+    // Swipe hint
+    'Deslize para ver mais': 'Swipe to see more',
+    // Country names in pills
+    'Brasil': 'Brazil',
+    'México': 'Mexico',
+    'Colômbia': 'Colombia',
+    'Equador': 'Ecuador',
+    'Paraguai': 'Paraguay',
+    'Rep. Dominicana': 'Dominican Rep.',
+    'Bolívia': 'Bolivia',
+    'Uruguai': 'Uruguay',
+    'Nicarágua': 'Nicaragua',
+    'Panamá': 'Panama',
+    'Guiana Francesa': 'French Guiana'
+  };
+
+  // Build reverse map (EN -> PT)
+  var reverseTextMap = {};
+  for (var k in textMap) {
+    if (textMap.hasOwnProperty(k)) {
+      reverseTextMap[textMap[k]] = k;
+    }
+  }
+
+  // Capture PT originals for data-i18n elements
+  function captureOriginals() {
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (!ptOriginals[key]) {
+        ptOriginals[key] = el.innerHTML;
+      }
+    });
+  }
+
+  // Walk DOM text nodes and do string replacement
+  function walkAndTranslate(root, map) {
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    var node;
+    while (node = walker.nextNode()) {
+      var parent = node.parentElement;
+      // Skip script/style/data-i18n tagged elements
+      if (!parent) continue;
+      if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') continue;
+      if (parent.closest('.lang-selector')) continue;
+
+      var text = node.nodeValue;
+      var changed = false;
+      for (var pt in map) {
+        if (map.hasOwnProperty(pt) && text.indexOf(pt) !== -1) {
+          text = text.split(pt).join(map[pt]);
+          changed = true;
+        }
+      }
+      if (changed) {
+        node.nodeValue = text;
+      }
+    }
+  }
+
+  // Update country pill text (keep flag emoji spans)
+  function updateCountryPills(lang) {
+    var pillMap = {
+      'Brasil': 'Brazil',
+      'México': 'Mexico',
+      'Colômbia': 'Colombia',
+      'Equador': 'Ecuador',
+      'Paraguai': 'Paraguay',
+      'Rep. Dominicana': 'Dominican Rep.',
+      'Bolívia': 'Bolivia',
+      'Uruguai': 'Uruguay',
+      'Nicarágua': 'Nicaragua',
+      'Panamá': 'Panama',
+      'Guiana Francesa': 'French Guiana'
+    };
+    var reversePillMap = {};
+    for (var pk in pillMap) {
+      if (pillMap.hasOwnProperty(pk)) reversePillMap[pillMap[pk]] = pk;
+    }
+    var map = lang === 'en' ? pillMap : reversePillMap;
+    document.querySelectorAll('.country-pill').forEach(function(pill) {
+      var textNodes = [];
+      pill.childNodes.forEach(function(n) {
+        if (n.nodeType === 3) textNodes.push(n);
+      });
+      textNodes.forEach(function(tn) {
+        var t = tn.nodeValue.trim();
+        if (map[t]) tn.nodeValue = ' ' + map[t];
+      });
+    });
+  }
+
+  function setLanguage(lang) {
+    if (lang === currentLang) return;
+
+    document.body.classList.add('lang-switching');
+
+    setTimeout(function() {
+      // Update data-i18n elements
+      if (lang === 'en') {
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          if (translations.en[key]) {
+            // Check if the translation contains HTML (tier legends)
+            if (translations.en[key].indexOf('<') !== -1) {
+              el.innerHTML = translations.en[key];
+            } else {
+              el.textContent = translations.en[key];
+            }
+          }
+        });
+        // Handle hero h1 (data-i18n-html)
+        var h1 = document.querySelector('.hero h1');
+        if (h1) h1.innerHTML = 'Diesel Engines <span>NCM 84089090</span><br>Latin America';
+        // Handle footer line 2
+        var footerP = document.querySelector('.footer p[data-i18n-html]');
+        if (footerP) footerP.innerHTML = 'Prepared by <a href="https://v4bilinski.github.io/saas-contabil/" target="_blank">V4 Bilinski & Co</a> for <a href="https://mwm.com.br/pt/" target="_blank">MWM Engines and Generators</a>';
+        // Walk and translate remaining text
+        walkAndTranslate(document.body, textMap);
+        // Update country pills
+        updateCountryPills('en');
+        // Update featured label
+        var featuredCard = document.querySelector('.pricing-card.featured');
+        if (featuredCard) featuredCard.setAttribute('data-featured-label', 'HIGHEST DEMAND');
+        // Update swipe hints
+        document.querySelectorAll('[data-swipe-hint]').forEach(function(el) {
+          el.setAttribute('data-swipe-hint', 'Swipe to see more \u2192');
+        });
+      } else {
+        // Restore PT originals
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          if (ptOriginals[key]) {
+            el.innerHTML = ptOriginals[key];
+          }
+        });
+        // Restore hero h1
+        var h1 = document.querySelector('.hero h1');
+        if (h1) h1.innerHTML = 'Motores Diesel <span>NCM 84089090</span><br>Am\u00e9rica Latina';
+        // Restore footer line 2
+        var footerP = document.querySelector('.footer p[data-i18n-html]');
+        if (footerP) footerP.innerHTML = 'Elaborado por <a href="https://v4bilinski.github.io/saas-contabil/" target="_blank">V4 Bilinski &amp; Co</a> para <a href="https://mwm.com.br/pt/" target="_blank">MWM Motores e Geradores</a>';
+        // Walk and translate remaining text back to PT
+        walkAndTranslate(document.body, reverseTextMap);
+        // Update country pills
+        updateCountryPills('pt');
+        // Restore featured label
+        var featuredCard = document.querySelector('.pricing-card.featured');
+        if (featuredCard) featuredCard.setAttribute('data-featured-label', 'MAIOR DEMANDA');
+        // Restore swipe hints
+        document.querySelectorAll('[data-swipe-hint]').forEach(function(el) {
+          el.setAttribute('data-swipe-hint', 'Deslize para ver mais \u2192');
+        });
+      }
+
+      // Update html lang
+      document.documentElement.lang = lang === 'en' ? 'en-US' : 'pt-BR';
+
+      // Update title and meta
+      if (lang === 'en') {
+        document.title = 'MWM | LATAM Market Study | NCM 84089090';
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', 'Complete market study for MWM expansion in Latin America. Diesel engines NCM 84089090 across 22 countries.');
+      } else {
+        document.title = 'MWM | Estudo de Mercado LATAM | NCM 84089090';
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', 'Estudo de mercado completo para expans\u00e3o MWM na Am\u00e9rica Latina. Motores diesel NCM 84089090 em 22 pa\u00edses.');
+      }
+
+      // Update button states
+      document.getElementById('langPT').classList.toggle('active', lang === 'pt');
+      document.getElementById('langEN').classList.toggle('active', lang === 'en');
+
+      currentLang = lang;
+
+      // Save preference
+      try { localStorage.setItem('mwm-lang', lang); } catch(e) {}
+
+      // Transition
+      document.body.classList.remove('lang-switching');
+      document.body.classList.add('lang-ready');
+      setTimeout(function() {
+        document.body.classList.remove('lang-ready');
+      }, 200);
+    }, 120);
+  }
+
+  // Button handlers
+  document.getElementById('langPT').addEventListener('click', function() { setLanguage('pt'); });
+  document.getElementById('langEN').addEventListener('click', function() { setLanguage('en'); });
+
+  // On load: capture originals and check saved preference
+  captureOriginals();
+  try {
+    var saved = localStorage.getItem('mwm-lang');
+    if (saved === 'en') {
+      setLanguage('en');
+    }
+  } catch(e) {}
+})();
 </script>
 
 </body>
